@@ -2,9 +2,13 @@ package com.example.scheduler;
 
 import java.util.ArrayList;
 
-public class ClassDetails<T> implements Modifiable<T> {
+public class ClassEntry<T> implements Modifiable<T> {
     private ArrayList<T> list = new ArrayList<>();
-    public ClassDetails () {
+    private String name;
+    private String date;
+    private int gradePercentage;
+
+    public ClassEntry() {
 
     }
 
