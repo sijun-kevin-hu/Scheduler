@@ -1,21 +1,12 @@
 package com.example.scheduler;
 
-/**
- * This class represents a Course object
- */
-public class Course<T> implements Modifiable<T> {
-    private T[] assignments;
+public class Catalog<T> implements Modifiable<T> {
+    private T[] courses;
     private int size;
-    private String name;
+    static final int MAX_CAPACITY = 100;
 
-    /**
-     * This constructor initializes assignments and sets name variable.
-     * @param name a name for the Course
-     */
-    public Course(String name) {
-        assignments = (T[]) new Object[Catalog.MAX_CAPACITY];
-        size = 0;
-        this.name = name;
+    public Catalog() {
+        courses = (T[]) new Object[100];
     }
 
     /**
@@ -26,8 +17,8 @@ public class Course<T> implements Modifiable<T> {
     public void add(T data) {
         checkData(data);
         int i = 0;
-        while (assignments[i] != null) {i++;}
-        assignments[i] = data;
+        while (courses[i] != null) {i++;}
+        courses[i] = data;
         size++;
     }
 
@@ -38,7 +29,7 @@ public class Course<T> implements Modifiable<T> {
     @Override
     public void delete(int index) {
         checkIndex(index);
-        assignments[index] = null;
+        courses[index] = null;
         size--;
     }
 
@@ -51,7 +42,7 @@ public class Course<T> implements Modifiable<T> {
     public void edit(T data, int index) {
         checkData(data);
         checkIndex(index);
-        assignments[index] = data;
+        courses[index] = data;
     }
 
     /**
@@ -69,26 +60,10 @@ public class Course<T> implements Modifiable<T> {
      * @param index an int index
      */
     private void checkIndex(int index) {
-        if (index < 0 || index >= Catalog.MAX_CAPACITY) {
+        if (index < 0 || index >= MAX_CAPACITY) {
             throw new IndexOutOfBoundsException("The inputted index is out of bounds.");
-        } else if (assignments[index] == null) {
+        } else if (courses[index] == null) {
             throw new NullPointerException("The array is empty at that index.");
         }
-    }
-
-    /**
-     * A getter method for name variable
-     * @return a String name
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * A setter method for name variable
-     * @param name a String for name
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 }
