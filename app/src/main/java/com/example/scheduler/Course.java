@@ -1,15 +1,13 @@
 package com.example.scheduler;
 
-import java.util.ArrayList;
-
-public class ClassEntry<T> implements Modifiable<T> {
-    private ArrayList<T> list = new ArrayList<>();
+public class Course<T> implements Modifiable<T> {
+    private T[] backingArray;
+    private int size = 0;
     private String name;
-    private String date;
-    private int gradePercentage;
 
-    public ClassEntry() {
-
+    public Course(String name) {
+        backingArray = (T[]) new Object[100];
+        this.name = name;
     }
 
     @Override
