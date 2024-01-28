@@ -77,6 +77,16 @@ public class Course<T> implements Modifiable<T> {
     }
 
     /**
+     * This method checks if the inputted name is valid.
+     * @param name is the name being checked.
+     */
+    private void checkName(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("The inputted name cannot be null");
+        }
+    }
+
+    /**
      * A getter method for name variable
      * @return a String name
      */
@@ -89,6 +99,7 @@ public class Course<T> implements Modifiable<T> {
      * @param name a String for name
      */
     public void setName(String name) {
+        checkName(name);
         this.name = name;
     }
 }
