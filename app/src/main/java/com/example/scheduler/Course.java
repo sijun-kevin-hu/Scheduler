@@ -18,10 +18,6 @@ public class Course<T> implements Modifiable<T> {
         this.name = name;
     }
 
-    /**
-     * This method adds an assignment to Course
-     * @param data The assignment
-     */
     @Override
     public void add(T data) {
         checkData(data);
@@ -31,10 +27,6 @@ public class Course<T> implements Modifiable<T> {
         size++;
     }
 
-    /**
-     * This method deletes assignment from index
-     * @param index an index
-     */
     @Override
     public void delete(int index) {
         checkIndex(index);
@@ -42,11 +34,6 @@ public class Course<T> implements Modifiable<T> {
         size--;
     }
 
-    /**
-     * This method edits the data at an index
-     * @param data an assignment object
-     * @param index an index
-     */
     @Override
     public void edit(T data, int index) {
         checkData(data);

@@ -6,12 +6,6 @@ public class Assignment <T> {
     private double time;
 
     /**
-     * An empty constructor
-     */
-    public Assignment (){
-
-    }
-    /**
      * setCourseName method: sets the name of tcourse
      * @param courseName
      */

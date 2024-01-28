@@ -2,7 +2,6 @@ package com.example.scheduler;
 
 public class Catalog<T> implements Modifiable<T> {
     private T[] courses;
-    private int size;
     static final int MAX_CAPACITY = 100;
 
     public Catalog() {
@@ -19,7 +18,6 @@ public class Catalog<T> implements Modifiable<T> {
         int i = 0;
         while (courses[i] != null) {i++;}
         courses[i] = data;
-        size++;
     }
 
     /**
@@ -30,7 +28,6 @@ public class Catalog<T> implements Modifiable<T> {
     public void delete(int index) {
         checkIndex(index);
         courses[index] = null;
-        size--;
     }
 
     /**
