@@ -1,28 +1,48 @@
 package com.example.scheduler;
 
-public class Assignment <T> implements Modifiable<T>{
+public class Assignment <T> {
     private String courseName;
     private int date;
     private double time;
 
-    public Assignment (String courseName, int date, int time){
-        this.date = date;
-        this.time = time;
+    /**
+     * An empty constructor
+     */
+    public Assignment (){
+
+    }
+    /**
+     * setCourseName method: sets the name of tcourse
+     * @param courseName
+     */
+    public void setCourseName(String courseName){
         this.courseName = courseName;
     }
 
-    @Override
-    public void add(T data) {
-
+    /**
+     * getCourseNAme: return the name of the course
+     * @return courseName
+     */
+    public String getCourseName(){
+        return this.courseName;
+    }
+    public void setDate(int date) {
+        this.date = date;
     }
 
-    @Override
-    public void delete(int index) {
-
+    /**
+     * getDate: return the date of the assignments
+     * @return date
+     */
+    public int getDate(){
+        return this.date;
     }
 
-    @Override
-    public void edit(T data, int index) {
-
+    /**
+     * setTime: sets the time of the assignment
+     * @param time
+     */
+    public void setTime(double time){
+        this.time = time;
     }
 }
