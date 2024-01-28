@@ -8,7 +8,7 @@ public class Assignment <T> {
     /**
      * An empty constructor
      */
-    public Assignment (){
+    public Assignment () {
 
     }
     /**
