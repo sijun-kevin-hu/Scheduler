@@ -90,15 +90,7 @@ public class Course<T> implements Modifiable<T> {
         this.name = name;
     }
 
-    public static void main(String[] args) {
-        Object test1 = new Object();
-        Object test2 = new Object();
-        Object test3 = new Object();
-
-        Course calculus = new Course("calculus");
-        calculus.add(test1);
-        calculus.add(test2);
-        calculus.add(test3);
+    public T[] getArray() {
+        return assignments;
     }
-
 }
