@@ -7,5 +7,5 @@ public enum TypeAssignment {
     EXAM,
     HOMEWORK,
     QUIZZES,
-    PROJECTS;
+    PROJECTS
 }
