@@ -1,37 +1,63 @@
 package com.example.scheduler;
 
-public class Catalog<T> implements Modifiable<T> {
-    private T[] courses;
+public class Catalog<T> { //implements Modifiable<T>
+    private Course[] courses;
+
+    private Assignment[] assignments;
     static final int MAX_CAPACITY = 100;
-    private int size;
+    private int sizeOfCourses;
+
+    private int sizeOfAssignments;
 
     public Catalog() {
-        courses = (T[]) new Object[100];
-        size = 0;
+        courses = new Course[MAX_CAPACITY];
+        assignments = new Assignment[MAX_CAPACITY];
+        sizeOfCourses = 0;
+        sizeOfAssignments = 0;
     }
 
     /**
-     * This method adds an assignment to Course
-     * @param data The assignment
+     * This method adds a course to the catalog.
+     * @param added The course
      */
-    @Override
-    public void add(T data) {
-        checkData(data);
+    public void addCourse(Course added) {
+        checkData(added);
         int i = 0;
         while (courses[i] != null) {i++;}
-        courses[i] = data;
-        size++;
+        courses[i] = added;
+        sizeOfCourses++;
+    }
+
+    /**
+     * This method adds an assignment to the catalog
+     * @param added is the assignmnet being added.
+     */
+    public void addAssignment(Assignment added) {
+        //Check data
+        int i = 0;
+        while (assignments[i] != null) {i++;}
+        assignments[i] = added;
+        sizeOfAssignments++;
     }
 
     /**
      * This method deletes assignment from index
      * @param index an index
      */
-    @Override
-    public void delete(int index) {
+    public void deleteCourse(int index) {
         checkIndex(index);
         courses[index] = null;
-        size--;
+        sizeOfCourses--;
+    }
+
+    /**
+     * This method deletes assignments from the catalog.
+     * @param index is the index at which the assignment is being deleted.
+     */
+    public void deleteAssignment(int index) {
+        //check index
+        assignments[index] = null;
+        sizeOfAssignments--;
     }
 
     /**
@@ -39,18 +65,28 @@ public class Catalog<T> implements Modifiable<T> {
      * @param data an assignment object
      * @param index an index
      */
-    @Override
-    public void edit(T data, int index) {
+    public void editCourse(Course data, int index) {
         checkData(data);
         checkIndex(index);
         courses[index] = data;
     }
 
     /**
+     * This method edits an existing assignment in the catalog.
+     * @param data is the new data being inputted.
+     * @param index is the index at which to edit the data.
+     */
+    public void editAssignment(Assignment data, int index) {
+        //checkdata
+        //check index
+        assignments[index] = data;
+    }
+
+    /**
      * Checks if data is empty
      * @param data an object T
      */
-    private void checkData(T data) {
+    private void checkData(Course data) {
         if (data == null) {
             throw new NullPointerException("The inputted data is empty.");
         }
