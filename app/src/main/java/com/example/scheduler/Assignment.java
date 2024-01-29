@@ -1,6 +1,6 @@
 package com.example.scheduler;
 
-public class Assignment {
+public class Assignment implements Comparable {
     private String courseName;
     private int date;
     private double time;
@@ -38,5 +38,11 @@ public class Assignment {
      */
     public void setTime(double time){
         this.time = time;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        //needs implementation
+        return 0;
     }
 }
