@@ -2,11 +2,12 @@ package com.example.scheduler;
 
 public class Catalog<T> implements Modifiable<T> {
     private T[] courses;
-    private int size;
     static final int MAX_CAPACITY = 100;
+    private int size;
 
     public Catalog() {
         courses = (T[]) new Object[100];
+        size = 0;
     }
 
     /**

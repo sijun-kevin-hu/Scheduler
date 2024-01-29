@@ -18,10 +18,6 @@ public class Course<T> implements Modifiable<T> {
         this.name = name;
     }
 
-    /**
-     * This method adds an assignment to Course
-     * @param data The assignment
-     */
     @Override
     public void add(T data) {
         checkData(data);
@@ -31,10 +27,6 @@ public class Course<T> implements Modifiable<T> {
         size++;
     }
 
-    /**
-     * This method deletes assignment from index
-     * @param index an index
-     */
     @Override
     public void delete(int index) {
         checkIndex(index);
@@ -42,11 +34,6 @@ public class Course<T> implements Modifiable<T> {
         size--;
     }
 
-    /**
-     * This method edits the data at an index
-     * @param data an assignment object
-     * @param index an index
-     */
     @Override
     public void edit(T data, int index) {
         checkData(data);
@@ -77,6 +64,16 @@ public class Course<T> implements Modifiable<T> {
     }
 
     /**
+     * This method checks if the inputted name is valid.
+     * @param name is the name being checked.
+     */
+    private void checkName(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("The inputted name cannot be null");
+        }
+    }
+
+    /**
      * A getter method for name variable
      * @return a String name
      */
@@ -89,6 +86,11 @@ public class Course<T> implements Modifiable<T> {
      * @param name a String for name
      */
     public void setName(String name) {
+        checkName(name);
         this.name = name;
+    }
+
+    public T[] getArray() {
+        return assignments;
     }
 }
