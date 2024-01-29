@@ -1,6 +1,6 @@
 package com.example.scheduler;
 
-public class Assignment <T> {
+public class Assignment {
     private String courseName;
     private int date;
     private double time;
