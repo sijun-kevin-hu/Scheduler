@@ -8,48 +8,29 @@
     tools:layout_editor_absoluteX="-105dp"
     tools:layout_editor_absoluteY="4dp">
 
-    <Button
-        android:id="@+id/CoursesButton"
+    <TextView
+        android:id="@+id/scheduler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="60dp"
-        android:text="@string/courses"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <CalendarView
-        android:id="@+id/calendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
+        android:fontFamily="@font/alex_brush"
+        android:text="@string/scheduler"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="96sp"
+        app:layout_constraintBottom_toTopOf="@+id/begin_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/dashboardButton"
-        app:layout_constraintHorizontal_bias="0.567"
-        app:layout_constraintVertical_bias="0.692">
-
-    </CalendarView>
+        app:layout_constraintVertical_bias="0.544" />
 
     <Button
-        android:id="@+id/toDoList"
+        android:id="@+id/begin_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="16dp"
-        android:text="To Do List"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/dashboardButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:text="Dashboard"
+        android:layout_marginBottom="208dp"
+        android:text="begin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
