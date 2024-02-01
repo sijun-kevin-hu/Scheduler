@@ -2,8 +2,16 @@ package com.example.scheduler;
 
 public class Assignment {
     private String courseName;
-    private int date;
-    private double time;
+    private String assignmentName;
+    private Date dueDate;
+    private String timeNotify;
+
+    public Assignment (String courseName, String assignmentName, Date dueDate, String timeNotify) {
+        this.courseName = courseName;
+        this.assignmentName = assignmentName;
+        this.dueDate = dueDate;
+        this.timeNotify = timeNotify;
+    }
 
     /**
      * setCourseName method: sets the name of tcourse
@@ -20,23 +28,41 @@ public class Assignment {
     public String getCourseName(){
         return this.courseName;
     }
-    public void setDate(int date) {
-        this.date = date;
+
+    /**
+     * Sets the date variable
+     * @param date an integer date
+     */
+    public void setDueDate(Date date) {
+        this.dueDate = date;
     }
 
     /**
      * getDate: return the date of the assignments
      * @return date
      */
-    public int getDate(){
-        return this.date;
+    public Date getDueDate(){
+        return this.dueDate;
     }
 
     /**
      * setTime: sets the time of the assignment
-     * @param time
+     * @param timeNotify a String
      */
-    public void setTime(double time){
-        this.time = time;
+    public void setTimeNotify(String timeNotify) {
+        this.timeNotify = timeNotify;
     }
+
+    /**
+     * Sets the name variable
+     * @param name a String name
+     */
+    public void setName(String name) {this.assignmentName = name;}
+
+    /**
+     * Returns the name variable
+     * @return a String name
+     */
+    public String getName() {return this.assignmentName;}
+
 }

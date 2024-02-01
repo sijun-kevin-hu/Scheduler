@@ -2,11 +2,9 @@ package com.example.scheduler;
 
 public class Catalog<T> { //implements Modifiable<T>
     private Course[] courses;
-
     private Assignment[] assignments;
     static final int MAX_CAPACITY = 100;
     private int sizeOfCourses;
-
     private int sizeOfAssignments;
 
     public Catalog() {
@@ -33,7 +31,7 @@ public class Catalog<T> { //implements Modifiable<T>
      * @param added is the assignmnet being added.
      */
     public void addAssignment(Assignment added) {
-        //Check data
+        checkData(added);
         int i = 0;
         while (assignments[i] != null) {i++;}
         assignments[i] = added;
@@ -55,7 +53,7 @@ public class Catalog<T> { //implements Modifiable<T>
      * @param index is the index at which the assignment is being deleted.
      */
     public void deleteAssignment(int index) {
-        //check index
+        checkIndex(index);
         assignments[index] = null;
         sizeOfAssignments--;
     }
@@ -77,8 +75,8 @@ public class Catalog<T> { //implements Modifiable<T>
      * @param index is the index at which to edit the data.
      */
     public void editAssignment(Assignment data, int index) {
-        //checkdata
-        //check index
+        checkData(data);
+        checkIndex(index);
         assignments[index] = data;
     }
 
@@ -87,6 +85,11 @@ public class Catalog<T> { //implements Modifiable<T>
      * @param data an object T
      */
     private void checkData(Course data) {
+        if (data == null) {
+            throw new NullPointerException("The inputted data is empty.");
+        }
+    }
+    private void checkData(Assignment data) {
         if (data == null) {
             throw new NullPointerException("The inputted data is empty.");
         }
