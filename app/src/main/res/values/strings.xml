@@ -7,4 +7,19 @@
     <string name="courses">Courses</string>
     <string name="header">Scheduler App</string>
     <string name="scheduler">Scheduler</string>
+    <string name="profile">Profile</string>
+    <string name="assignment">Assignments</string>
+    <string name="Exams">Exams</string>
+    <string name="TodoList">"ToDo List "</string>
+    <string name="homework">"Home Work "</string>
+    <string name="Quiz">Quiz</string>
+    <string name="others">Others</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Courses">Courses</string>
+    <string name="FirstName">"First Name "</string>
+    <string name="update">Update</string>
+    <string name="profileName">"profile Name"</string>
+    <string name="addClassButton">add</string>
+    <string name="InstructorName">Instructor Name</string>
 </resources>

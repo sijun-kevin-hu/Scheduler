@@ -1,10 +1,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.scheduler.MainActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+    tools:context="com.example.scheduler.SecondFragment">
+
+    <item android:id="@+id/profile"
+        android:title="@string/profile"
+        android:icon="@drawable/profile"
+        />
+    <item android:id="@+id/courses"
+        android:title="@string/courses"
+        android:icon="@drawable/courses"
+        />
+    <item android:id="@+id/assignment"
+        android:title="@string/assignment"
+        android:icon="@drawable/assignment">
+    </item>
+
+    <item android:id="@+id/todoList"
+        android:title="@string/TodoList"
+        android:icon="@drawable/todo_list"/>
+   <item
+   android:id="@+id/action_settings"
+   android:orderInCategory="100"
+   android:title="@string/action_settings"
+   app:showAsAction="never" />
 </menu>
