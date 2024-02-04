@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CoursesFragment#newInstance} factory method to
+ * Use the  factory method to
  * create an instance of this fragment.
  */
 public class CoursesFragment extends Fragment {
@@ -30,8 +30,9 @@ public class CoursesFragment extends Fragment {
     private LayoutInflater inflator;
     private TextInputEditText courseNameInput, instructorNameInput,
                               timeInput;
-
-
+    public CoursesFragment() {
+        courses = new Catalog<>();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,10 @@ public class CoursesFragment extends Fragment {
     public void addNewCourses(){
         TextView newCourseTextView = new TextView(getContext());
         newCourseTextView.setText(courseNameInput.getText().toString());
+
+        classes = new Course(courseNameInput.getText().toString(),
+                    instructorNameInput.getText().toString());
+        courses.addCourse(classes);
     }
 
 
