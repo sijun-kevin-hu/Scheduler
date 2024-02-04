@@ -27,6 +27,27 @@ public class Catalog<T> { //implements Modifiable<T>
     }
 
     /**
+     * This method deletes assignment from index
+     * @param index an index
+     */
+    public void deleteCourse(int index) {
+        checkIndex(index);
+        courses[index] = null;
+        sizeOfCourses--;
+    }
+
+    /**
+     * Returns the Course object of a given index
+     * @param index an int index
+     * @return a Course object
+     */
+    public Course getCourse(int index) {
+        checkIndex(index);
+        Course temp = courses[index];
+        return temp;
+    }
+
+    /**
      * This method adds an assignment to the catalog
      * @param added is the assignmnet being added.
      */
@@ -39,13 +60,14 @@ public class Catalog<T> { //implements Modifiable<T>
     }
 
     /**
-     * This method deletes assignment from index
+     * This method edits the data at an index
+     * @param data an assignment object
      * @param index an index
      */
-    public void deleteCourse(int index) {
+    public void editCourse(Course data, int index) {
+        checkData(data);
         checkIndex(index);
-        courses[index] = null;
-        sizeOfCourses--;
+        courses[index] = data;
     }
 
     /**
@@ -56,17 +78,6 @@ public class Catalog<T> { //implements Modifiable<T>
         checkIndex(index);
         assignments[index] = null;
         sizeOfAssignments--;
-    }
-
-    /**
-     * This method edits the data at an index
-     * @param data an assignment object
-     * @param index an index
-     */
-    public void editCourse(Course data, int index) {
-        checkData(data);
-        checkIndex(index);
-        courses[index] = data;
     }
 
     /**
@@ -102,8 +113,6 @@ public class Catalog<T> { //implements Modifiable<T>
     private void checkIndex(int index) {
         if (index < 0 || index >= MAX_CAPACITY) {
             throw new IndexOutOfBoundsException("The inputted index is out of bounds.");
-        } else if (courses[index] == null) {
-            throw new NullPointerException("The array is empty at that index.");
         }
     }
 }
