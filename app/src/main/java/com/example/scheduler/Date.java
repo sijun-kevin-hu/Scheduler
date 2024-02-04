@@ -6,6 +6,7 @@ public class Date implements Comparable<Date> {
     private int year;
 
     public Date (int month, int day, int year) {
+        checkDateInput(month, day, year);
         this.month = month;
         this.day = day;
         this.year = year;
@@ -35,5 +36,15 @@ public class Date implements Comparable<Date> {
             }
         }
         return 0;
+    }
+
+    private void checkDateInput(int month, int day, int year) {
+        if (month <= 0 || month > 12) {
+            throw new IllegalArgumentException("The inputted date is not a real date.");
+        } else if (day <= 0 || day > 31) {
+            throw new IllegalArgumentException("The inputted date is not a real date. ");
+        } else if (year <= 0) {
+            throw new IllegalArgumentException("The inputted date is not a real date");
+        }
     }
 }

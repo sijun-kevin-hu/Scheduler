@@ -31,4 +31,8 @@ public class Course {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setInstructor(String instructor) { this.instructor = instructor};
+
+    public void getInstructor() { return instructor};
 }
