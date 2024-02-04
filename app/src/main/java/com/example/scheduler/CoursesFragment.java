@@ -58,7 +58,7 @@ public class CoursesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //call add new courses method
-
+               showAddCourseDialog();
                 addNewCourses();
             }
         });

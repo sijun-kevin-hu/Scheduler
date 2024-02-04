@@ -32,7 +32,9 @@ public class Course {
         this.name = name;
     }
 
-    public void setInstructor(String instructor) { this.instructor = instructor;}
+    public void setInstructor(String instructor) {
+        this.instructor = instructor;
+    }
 
     public String getInstructor() { return instructor;}
 }
