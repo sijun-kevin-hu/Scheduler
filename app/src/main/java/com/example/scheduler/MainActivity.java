@@ -47,6 +47,10 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setItemIconTintList(null);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        //Adding the header fragments
+       // getSupportFragmentManager().beginTransaction()
+               // .replace(R.id.layout_header, new HeaderFragment()).commit();
+
     }
 
     @Override

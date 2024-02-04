@@ -2,9 +2,13 @@ package com.example.scheduler;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
@@ -24,57 +31,47 @@ import java.util.List;
  */
 public class CoursesFragment extends Fragment {
     private Catalog<String> courses;
-    private Course classes;
-    private LinearLayout coursesContainer;
+    private RecyclerView recyclerView;
+    private CoursesAdapter adapter;
     private Button addButton;
-    private LayoutInflater inflator;
-    private TextInputEditText courseNameInput, instructorNameInput,
-                              timeInput;
-
-
+    private TextInputEditText courseNameInput, instructorNameInput, timeInput;
+    private LayoutInflater inflater;
+    private NavigationView navigationView;
+    public List<String> coursesList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-          courses = new Catalog<>();
+        courses = new Catalog<>();
+        coursesList = new ArrayList<>();
+        adapter = new CoursesAdapter(coursesList);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_courses, container, false);
-        coursesContainer = root.findViewById(R.id.classContainer);
+        recyclerView = root.findViewById(R.id.classContainer);
         addButton = root.findViewById(R.id.addClassButton);
-        inflator = LayoutInflater.from(requireContext());
-        this.inflator = inflater;
+        this.inflater = inflater;
 
-        View classModification = inflater.inflate(R.layout.class_modification, null);
-        courseNameInput = classModification.findViewById(R.id.courseTitleInput);
-        instructorNameInput = classModification.findViewById(R.id.InstructorNameInput);
-        timeInput = classModification.findViewById(R.id.courseTimeInput);
+        // Initialize RecyclerView layout manager and adapter
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //call add new courses method
-               showAddCourseDialog();
-                addNewCourses();
+                // Add new course item to the list
+                showAddCourseDialog();
             }
         });
         return root;
-
     }
 
-    // Method to show the dialog
     private void showAddCourseDialog() {
         // Inflate the dialog layout
-        View dialogView = inflator.inflate(R.layout.class_modification, null);
-
-        // Initialize TextInputEditText fields in the dialog
-        courseNameInput = dialogView.findViewById(R.id.courseTitleInput);
-        instructorNameInput = dialogView.findViewById(R.id.InstructorNameInput);
-        timeInput = dialogView.findViewById(R.id.courseTimeInput);
+        View dialogView = inflater.inflate(R.layout.class_modification, null);
 
         // Set up the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -85,7 +82,20 @@ public class CoursesFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Add the course when the "Add" button in the dialog is clicked
-                //addNewCourse(courseNameInput.getText().toString());
+               courseNameInput = dialogView.findViewById(R.id.courseTitleInput);
+               instructorNameInput = dialogView.findViewById(R.id.InstructorNameInput);
+                timeInput = dialogView.findViewById(R.id.courseTimeInput);
+
+                String courseName = courseNameInput.getText().toString().trim();
+                if (!courseName.isEmpty()) {
+                    for (int i=0; i<8; i++){
+                        adapter.addCourse(courseName);
+                        recyclerView.setAdapter(adapter);
+                    }
+                } else {
+                    Toast.makeText(getContext(), "Course name cannot be empty", Toast.LENGTH_SHORT).show();
+                }
+
                 dialog.dismiss();
             }
         });
@@ -101,10 +111,4 @@ public class CoursesFragment extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-    public void addNewCourses(){
-        TextView newCourseTextView = new TextView(getContext());
-        newCourseTextView.setText(courseNameInput.getText().toString());
-    }
-
-
 }

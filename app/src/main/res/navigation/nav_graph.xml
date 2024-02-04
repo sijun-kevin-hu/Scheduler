@@ -8,12 +8,49 @@
         android:id="@+id/profile"
         android:name="com.example.scheduler.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_layout_header"
+            app:destination="@id/layout_header" />
+        <argument
+            android:name="FirstName"
+            app:argType="string" />
+        <argument
+            android:name="LastName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id ="@+id/layout_header"
+        android:name="com.example.scheduler.HeaderFragment"
+        android:label="@string/header"
+        tools:layout="@layout/fragment_header">
+        <argument
+            android:name="FirstName"
+            app:argType="string" />
+        <argument
+            android:name="LastName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_layout_header_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
+
     <fragment
         android:id="@+id/courses"
         android:name="com.example.scheduler.CoursesFragment"
         android:label="Courses"
-        tools:layout="@layout/fragment_courses" />
+        tools:layout="@layout/fragment_courses" >
+        <argument
+            android:name="CourseTitle"
+            app:argType="string" />
+        <argument
+            android:name="InstructorName"
+            app:argType="string" />
+        <argument android:name="Time" />
+        <action
+            android:id="@+id/action_courses_to_classModificationFragment"
+            app:destination="@id/classModificationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/todoList"
         android:name="com.example.scheduler.TodoListFragment"
@@ -24,4 +61,19 @@
         android:name="com.example.scheduler.AssignmentFragment"
         android:label="Assignment"
         tools:layout="@layout/fragment_assignment" />
+    <fragment
+        android:id="@+id/classModificationFragment"
+        android:name="com.example.scheduler.classModificationFragment"
+        android:label="classModificationFragment" >
+        <argument
+            android:name="CourseTitle"
+            app:argType="string" />
+        <argument
+            android:name="InstructorName"
+            app:argType="string" />
+        <argument android:name="Time" />
+        <action
+            android:id="@+id/action_classModificationFragment_to_courses"
+            app:destination="@id/courses" />
+    </fragment>
 </navigation>

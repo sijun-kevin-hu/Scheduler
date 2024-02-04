@@ -47,7 +47,6 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav_graph"/>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationView"
@@ -55,7 +54,7 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_main"
-        app:headerLayout="@layout/layout_header"
+        app:headerLayout="@layout/fragment_header"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_gravity="start"/>
 </androidx.drawerlayout.widget.DrawerLayout>
