@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class CoursesFragment extends Fragment {
     private Catalog<String> courses;
+    private Course classes;
     private LinearLayout coursesContainer;
     private Button addButton;
     private LayoutInflater inflator;
@@ -44,6 +45,7 @@ public class CoursesFragment extends Fragment {
         coursesContainer = root.findViewById(R.id.classContainer);
         addButton = root.findViewById(R.id.addClassButton);
         inflator = LayoutInflater.from(requireContext());
+        this.inflator = inflater;
         View classModification = inflater.inflate(R.layout.class_modification, null);
         courseNameInput = classModification.findViewById(R.id.courseTitleInput);
         instructorNameInput = classModification.findViewById(R.id.InstructorNameInput);
@@ -62,5 +64,6 @@ public class CoursesFragment extends Fragment {
         TextView newCourseTextView = new TextView(getContext());
         newCourseTextView.setText(courseNameInput.getText().toString());
     }
+
 
 }
