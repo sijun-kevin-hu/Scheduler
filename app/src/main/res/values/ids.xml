@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="edit_option" type="id">@+id/edit_option</item>
+    <item name="delete_option" type="id">@+id/delete_option</item>
+</resources>
