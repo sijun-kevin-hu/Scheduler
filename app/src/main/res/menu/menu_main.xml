@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.scheduler.SecondFragment">
+    tools:context="com.example.scheduler.ExamFragment">
 
     <item android:id="@+id/profile"
         android:title="@string/profile"
@@ -15,13 +15,18 @@
         android:title="@string/assignment"
         android:icon="@drawable/assignment">
     </item>
+    <item android:id="@+id/exams"
+        android:title="@string/Exams"
+        android:icon="@drawable/exam">
+</item>
 
     <item android:id="@+id/todoList"
         android:title="@string/TodoList"
         android:icon="@drawable/todo_list"/>
    <item
-   android:id="@+id/action_settings"
-   android:orderInCategory="100"
-   android:title="@string/action_settings"
-   app:showAsAction="never" />
+   android:id="@+id/notification"
+       android:icon="@drawable/notification"
+       android:title="@string/notifcation"
+    android:orderInCategory="100"
+   app:showAsAction="never"/>
 </menu>

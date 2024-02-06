@@ -22,6 +22,7 @@ import com.example.scheduler.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,12 +30,14 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
+    private TextView headerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         drawerLayout = findViewById(R.id.drawerLayout);
 
@@ -69,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.profile) {
+            headerView =binding.textviewSecond;
+            headerView.setText("Profile");
             return true;
         }
 

@@ -10,48 +10,48 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/assignTitleLayout"
+            android:id="@+id/toDoDateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="180dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/assignCourseLayout">
+            app:layout_constraintBottom_toTopOf="@+id/toDoTypeLayout">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/assignTitleInput"
+                android:id="@+id/toDoDateInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Assignment Title" />
+                android:hint="Date:MM-DD-YY" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/assignCourseLayout"
+            android:id="@+id/toDoTypeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/assignTitleLayout"
-            app:layout_constraintBottom_toTopOf="@+id/assignDueDateLayout">
+            app:layout_constraintTop_toBottomOf="@+id/toDoDateLayout"
+            app:layout_constraintBottom_toTopOf="@+id/toDoDiscrLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/assignCourseInput"
+                android:id="@+id/toDoTypeInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Associated Class" />
+                android:hint="Type: homework, project, other" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/assignDueDateLayout"
+            android:id="@+id/toDoDiscrLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="300dp"
-            app:layout_constraintTop_toBottomOf="@+id/assignCourseLayout"
+            app:layout_constraintTop_toBottomOf="@+id/toDoTypeLayout"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/assignDueDateInput"
+                android:id="@+id/toDoDiscrInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Due dates: MM-DD-YY" />
+                android:hint="Description" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

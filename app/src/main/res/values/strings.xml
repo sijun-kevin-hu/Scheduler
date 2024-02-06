@@ -9,7 +9,7 @@
     <string name="scheduler">Scheduler</string>
     <string name="profile">Profile</string>
     <string name="assignment">Assignments</string>
-    <string name="Exams">Exams</string>
+    <string name="Exams">Exam</string>
     <string name="TodoList">"ToDo List "</string>
     <string name="homework">"Home Work "</string>
     <string name="Quiz">Quiz</string>
@@ -22,4 +22,5 @@
     <string name="profileName">"profile name"</string>
     <string name="addClassButton">add</string>
     <string name="InstructorName">Instructor Name</string>
+    <string name="notifcation">Notification</string>
 </resources>

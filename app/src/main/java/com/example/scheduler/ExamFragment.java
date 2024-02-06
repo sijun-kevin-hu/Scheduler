@@ -24,31 +24,32 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link TodoListFragment#newInstance} factory method to
+ * Use the {@link ExamFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class TodoListFragment extends Fragment {
+public class ExamFragment extends Fragment {
+
     private RecyclerView recyclerView;
-    private ToDoAdapter adapter;
+    private ExamAdapter adapter;
     private FloatingActionButton addButton;
-    private TextInputEditText toDodateInput, toDoTypeInput, toDODiscrInput;
+    private TextInputEditText examDateInput, examTimeInput, examLocationInput;
     private LayoutInflater inflater;
     private NavigationView navigationView;
-    public List<ToDoList> toDoList;
+    public List<Exam>  examList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        toDoList = new ArrayList<>();
-        adapter = new ToDoAdapter(toDoList);
+        examList = new ArrayList<>();
+        adapter = new ExamAdapter(examList);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_todo_list, container, false);
-        recyclerView = root.findViewById(R.id.toDoContainer);
-        addButton = root.findViewById(R.id.addToDoButton);
+        View root = inflater.inflate(R.layout.fragment_exam, container, false);
+        recyclerView = root.findViewById(R.id.examContainer);
+        addButton = root.findViewById(R.id.addExamButton);
         this.inflater = inflater;
 
         // Initialize RecyclerView layout manager and adapter
@@ -70,33 +71,33 @@ public class TodoListFragment extends Fragment {
 
     private void showAddCourseDialog() {
         // Inflate the dialog layout
-        View dialogView = inflater.inflate(R.layout.todolayout, null);
+        View dialogView = inflater.inflate(R.layout.examlayout, null);
 
         // Set up the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(dialogView);
-        builder.setTitle("Add TodoList");
+        builder.setTitle("Add Course");
 
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Add the course when the "Add" button in the dialog is clicked
-                toDodateInput = dialogView.findViewById(R.id.toDoDateInput);
-                toDoTypeInput = dialogView.findViewById(R.id.toDoTypeInput);
-                toDODiscrInput = dialogView.findViewById(R.id.toDoDiscrInput);
+                examDateInput = dialogView.findViewById(R.id.examDateInput);
+                examTimeInput = dialogView.findViewById(R.id.examTimeInput);
+                examLocationInput = dialogView.findViewById(R.id.examLocationInput);
 
-                String toDoDate= toDodateInput.getText().toString().trim();
-                String toDoType = toDoTypeInput.getText().toString().trim();
-                String toDoDiscr = toDODiscrInput.getText().toString().trim();
-                if (!toDoType.isEmpty() && !toDoDate.isEmpty()
-                        && !toDoDiscr.isEmpty()) {
-                    adapter.addToDo(toDoDate, toDoType, toDoDiscr);
+                String examDate = examDateInput.getText().toString().trim();
+                String examTime= examTimeInput.getText().toString().trim();
+                String examLoc = examLocationInput.getText().toString().trim();
+                if (!examLoc.isEmpty() && !examDate.isEmpty()
+                        && !examTime.isEmpty()) {
+                    adapter.addAssign(examDate, examTime, examLoc);
                     //Sort it based on Date
                     adapter.sortAssignmentsByDueDate();
                     //Set the Adapter
                     recyclerView.setAdapter(adapter);
                 } else {
-                    Toast.makeText(getContext(), "Todo List fields can not be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Exam fields can not be empty", Toast.LENGTH_SHORT).show();
                 }
 
                 dialog.dismiss();
@@ -116,22 +117,22 @@ public class TodoListFragment extends Fragment {
     }
     private void showEditCourseDialog(int position) {
         //Inflate the dialog
-        View dialog = inflater.inflate(R.layout.todolayout, null);
+        View dialog = inflater.inflate(R.layout.examlayout, null);
         //setUp the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(dialog);
         builder.setTitle("Edit the Course");
-        toDodateInput= dialog.findViewById(R.id.toDoDateInput);
-        toDoTypeInput= dialog.findViewById(R.id.toDoDateInput);
-        toDODiscrInput = dialog.findViewById(R.id.toDoDiscrInput);
+        examDateInput = dialog.findViewById(R.id.examDateInput);
+        examTimeInput = dialog.findViewById(R.id.examTimeInput);
+        examLocationInput = dialog.findViewById(R.id.examLocationInput);
 
         //Action buttons
         builder.setPositiveButton("update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                adapter.editToDo(toDodateInput.getText().toString().trim(),
-                        toDoTypeInput.getText().toString().trim(),
-                        toDODiscrInput.getText().toString().trim());
+                adapter.editExam(examDateInput.getText().toString().trim(),
+                        examTimeInput.getText().toString().trim(),
+                        examLocationInput.getText().toString().trim());
                 //Sort it based on Date
                 adapter.sortAssignmentsByDueDate();
                 recyclerView.setAdapter(adapter);
@@ -150,14 +151,14 @@ public class TodoListFragment extends Fragment {
     private void showDeleteCourseDialog(int position) {
         //Creat new Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Delete Todo List");
-        builder.setMessage("Are you sure you want to delete this Todo List?");
+        builder.setTitle("Delete Exam");
+        builder.setMessage("Are you sure you want to delete this Exam?");
         //Action buttons
         builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //delete the course
-                adapter.deleteToDo();
+                adapter.deleteExam();
                 adapter.notifyItemRemoved(position);
                 //  recyclerView.setAdapter(adapter);
             }

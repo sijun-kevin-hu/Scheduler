@@ -14,8 +14,9 @@
 
         <TextView
             android:id="@+id/courseTitleTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
             android:text="TextView"
             android:textSize="24dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -25,25 +26,28 @@
 
         <TextView
             android:id="@+id/instructorNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="36dp"
+            android:layout_width="118dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="12dp"
             android:layout_marginBottom="4dp"
             android:text="TextView"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/courseTitleTextView"
-            app:layout_constraintEnd_toStartOf="@+id/timeTextView" />
+            app:layout_constraintEnd_toStartOf="@id/timeTextView"/>
 
         <TextView
             android:id="@+id/timeTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="88dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="14dp"
             android:layout_marginBottom="4dp"
             android:text="TextView"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/instructorNameTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
