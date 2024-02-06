@@ -27,23 +27,23 @@
         android:id="@+id/courseText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="05dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/Courses"
         android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/classContainer"
-        app:layout_constraintEnd_toStartOf="@+id/addClassButton"
-        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.154"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/classContainer"
-        android:layout_width="387dp"
-        android:layout_height="608dp"
+        android:layout_width="380dp"
+        android:layout_height="639dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="48dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,5 +52,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/courseText"
         app:layout_constraintVertical_bias="1.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

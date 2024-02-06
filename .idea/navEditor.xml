@@ -128,15 +128,6 @@
                             <option name="y" value="362" />
                           </Point>
                         </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_classModificationFragment_to_courses">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
@@ -149,25 +140,16 @@
                             <option name="y" value="180" />
                           </Point>
                         </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_courses_to_classModificationFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="examFragment">
+                  <entry key="exams">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="20" />
-                            <option name="y" value="660" />
+                            <option name="x" value="36" />
+                            <option name="y" value="-78" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -194,13 +176,25 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="notification">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="46" />
+                            <option name="y" value="634" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="profile">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-6" />
-                            <option name="y" value="101" />
+                            <option name="x" value="-34" />
+                            <option name="y" value="303" />
                           </Point>
                         </option>
                         <option name="myPositions">
