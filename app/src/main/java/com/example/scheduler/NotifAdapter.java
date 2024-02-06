@@ -16,12 +16,12 @@ import java.util.List;
 
 
 public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.ViewHolder> {
-    private List<NotificationItem> notifList;
+    private List<Notification> notifList;
     private Context context;
     private TextView title, name, time;
 
 
-    public NotifAdapter(List<NotificationItem> notifList) {
+    public NotifAdapter(List<Notification> notifList) {
 
         this.notifList = notifList;
     }
@@ -35,10 +35,10 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        NotificationItem newNotif = notifList.get(position);
+        Notification newNotif = notifList.get(position);
 
-        holder.courseTextView.setText(newNotif.getName());
-        holder.instructorTextView.setText(newNotif.getType());
+        holder.courseTextView.setText(newNotif.getType());
+        holder.instructorTextView.setText(newNotif.getContent());
         holder.timeTextView.setText(newNotif.getDueDate());
         //getting clicked position
     }
@@ -49,10 +49,12 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.ViewHolder> 
         return notifList.size();
     }
 
-    public void addNotif(NotificationItem notificationItem) {
-        notifList.add(notificationItem);
+    public void addNotif(String type, String content, String dudDate) {
+        Notification newNotif = new Notification(type, content, dudDate);
+        notifList.add(newNotif);
     }
 
+    /**
     //Comparing the dates
     public void sortNotifsByDueDate() {
         Collections.sort(notifList, new Comparator<NotificationItem>() {
@@ -64,6 +66,7 @@ public class NotifAdapter extends RecyclerView.Adapter<NotifAdapter.ViewHolder> 
         });
         notifyDataSetChanged();
     }
+     */
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         TextView courseTextView, instructorTextView, timeTextView;

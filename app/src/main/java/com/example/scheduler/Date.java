@@ -30,11 +30,11 @@ public class Date implements Comparable<Date> {
 
     private void checkDateInput(int month, int day, int year) {
         if (month <= 0 || month > 12) {
-            throw new IllegalArgumentException("The inputted date is not a real date.");
+            throw new IllegalArgumentException("The inputted month is not a real date.");
         } else if (day <= 0 || day > 31) {
-            throw new IllegalArgumentException("The inputted date is not a real date. ");
+            throw new IllegalArgumentException("The inputted day is not a real date. ");
         } else if (year <= 0) {
-            throw new IllegalArgumentException("The inputted date is not a real date");
+            throw new IllegalArgumentException("The inputted year is not a real date");
         }
     }
 }

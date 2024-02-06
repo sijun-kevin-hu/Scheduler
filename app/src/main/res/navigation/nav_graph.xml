@@ -75,5 +75,9 @@
             app:argType="string" />
         <argument android:name="Time" />
     </fragment>
+    <fragment
+        android:id="@+id/notification"
+        android:name="com.example.scheduler.NotificationFragment"
+        android:label="NotificationFragment" />
 
 </navigation>
