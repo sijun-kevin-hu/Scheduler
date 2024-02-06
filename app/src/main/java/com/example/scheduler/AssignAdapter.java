@@ -10,19 +10,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.scheduler.Course;
-import com.google.android.material.textfield.TextInputEditText;
-
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHolder> {
-    private List<Course> coursesList;
+
+public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.ViewHolder> {
+    private List<Assignment> assignList;
     private Context context;
     private TextView title, name, time;
     private int clickedPosition = -1;
+    private Date date;
 
-    public CoursesAdapter(List<Course> coursesList) {
-        this.coursesList = coursesList;
+    public AssignAdapter(List<Assignment> assignList) {
+
+        this.assignList = assignList;
     }
 
     @NonNull
@@ -34,12 +36,12 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Course courseTile = coursesList.get(position);
+        Assignment newAssign = assignList.get(position);
 
-        holder.courseTextView.setText(courseTile.getName());
-        holder.instructorTextView.setText(courseTile.getInstructor());
-        holder.timeTextView.setText(courseTile.getTime());
-         //getting clicked position
+        holder.courseTextView.setText(newAssign.getName());
+        holder.instructorTextView.setText(newAssign.getCourseName());
+        holder.timeTextView.setText(newAssign.getDueDate());
+        //getting clicked position
 
 
         // Set up context menu for each item
@@ -55,7 +57,7 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
         holder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-               // menu.setHeaderTitle("Options");
+                // menu.setHeaderTitle("Options");
                 menu.add(Menu.NONE, R.id.edit_option, Menu.NONE, "Edit");
                 menu.add(Menu.NONE, R.id.delete_option, Menu.NONE, "Delete");
             }
@@ -65,25 +67,38 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return coursesList.size();
+        return assignList.size();
     }
 
-    public void addCourse(String courseName, String instructorName,
-                          String time) {
-        Course newCourse = new Course(courseName, instructorName, time);
-        coursesList.add(newCourse);
+    public void addAssign(String assignTitle, String assignCourse,
+                          String dueDate) {
+        Assignment newAssign = new Assignment(assignTitle, assignCourse, dueDate);
+        assignList.add(newAssign);
     }
-    public void editCourse(String courseName, String instructorName,
-                           String time){
-        coursesList.get(clickedPosition).setName(courseName);
-        coursesList.get(clickedPosition).setInstructor(instructorName);
-        coursesList.get(clickedPosition).setTime(time);
+    public void editAssign(String assignTitle, String assignCourse,
+                           String dueDate){
+
+        assignList.get(clickedPosition).setName(assignTitle);
+        assignList.get(clickedPosition).setCourseName(assignCourse);
+        assignList.get(clickedPosition).setDueDate(dueDate);
     }
-    public void deleteCourse(){
-        coursesList.remove(clickedPosition);
+    public void deleteAssign(){
+        assignList.remove(clickedPosition);
     }
     public int getClickedPosition(){
         return clickedPosition;
+    }
+    //Comparing the dates
+    public void sortAssignmentsByDueDate() {
+        Collections.sort(assignList, new Comparator<Assignment>() {
+            @Override
+            public int compare(Assignment assign1, Assignment assign2) {
+                // Compare due dates using the compareTo method in the Date class
+                return assign1.getFormattedDate().compareTo(assign2.getFormattedDate());
+            }
+        });
+        notifyDataSetChanged(); // Notify the adapter after sorting
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
@@ -103,4 +118,5 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
             menu.add(Menu.NONE, R.id.delete_option, Menu.NONE, "Delete");
         }
     }
+
 }

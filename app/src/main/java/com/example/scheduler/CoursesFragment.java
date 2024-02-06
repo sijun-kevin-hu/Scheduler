@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -36,7 +37,7 @@ public class CoursesFragment extends Fragment implements View.OnCreateContextMen
     private Catalog<String> courses;
     private RecyclerView recyclerView;
     private CoursesAdapter adapter;
-    private Button addButton;
+    private FloatingActionButton addButton;
     private TextInputEditText courseNameInput, instructorNameInput, timeInput;
     private LayoutInflater inflater;
     private NavigationView navigationView;
@@ -128,7 +129,6 @@ public class CoursesFragment extends Fragment implements View.OnCreateContextMen
         courseNameInput = dialog.findViewById(R.id.courseTitleInput);
         instructorNameInput = dialog.findViewById(R.id.InstructorNameInput);
         timeInput = dialog.findViewById(R.id.courseTimeInput);
-        //instructorNameInput.setText(courses.getCourse(position).getInstructor());
 
         //Action buttons
         builder.setPositiveButton("update", new DialogInterface.OnClickListener() {

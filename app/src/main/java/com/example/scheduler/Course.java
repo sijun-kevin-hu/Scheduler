@@ -6,14 +6,17 @@ package com.example.scheduler;
 public class Course {
     private String name;
     private String instructor;
+    private String time; //time section of the course
+
 
     /**
      * This constructor initializes assignments and sets name variable.
      * @param name a name for the Course
      */
-    public Course(String name, String instructor) {
+    public Course(String name, String instructor, String time) {
         this.name = name;
         this.instructor = instructor;
+        this.time = time;
     }
 
     /**
@@ -37,4 +40,11 @@ public class Course {
     }
 
     public String getInstructor() { return instructor;}
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 }

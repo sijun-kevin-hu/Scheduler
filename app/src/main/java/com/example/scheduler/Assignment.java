@@ -3,14 +3,14 @@ package com.example.scheduler;
 public class Assignment {
     private String courseName;
     private String assignmentName;
-    private Date dueDate;
+    private String dueDate;
     private String timeNotify;
 
-    public Assignment (String courseName, String assignmentName, Date dueDate, String timeNotify) {
+    public Assignment (String courseName, String assignmentName, String dueDate) {
         this.courseName = courseName;
         this.assignmentName = assignmentName;
         this.dueDate = dueDate;
-        this.timeNotify = timeNotify;
+       // this.timeNotify = timeNotify;
     }
 
     /**
@@ -33,7 +33,7 @@ public class Assignment {
      * Sets the date variable
      * @param date an integer date
      */
-    public void setDueDate(Date date) {
+    public void setDueDate(String date) {
         this.dueDate = date;
     }
 
@@ -41,7 +41,7 @@ public class Assignment {
      * getDate: return the date of the assignments
      * @return date
      */
-    public Date getDueDate(){
+    public String getDueDate(){
         return this.dueDate;
     }
 
@@ -64,5 +64,13 @@ public class Assignment {
      * @return a String name
      */
     public String getName() {return this.assignmentName;}
+    public Date getFormattedDate(){
+        String[] format = dueDate.split("-");
+        int month = Integer.parseInt(format[0]);
+        int day = Integer.parseInt(format[1]);
+        int year = Integer.parseInt(format[2]);
+        Date due = new Date(month, day, year);
+        return due;
+    }
 
 }

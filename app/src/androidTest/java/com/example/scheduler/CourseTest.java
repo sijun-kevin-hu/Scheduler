@@ -22,7 +22,7 @@ public class CourseTest {
     private Course calculus;
     @Before
     public void setUp() {
-        calculus = new Course("calculus", "Fredrick");
+        calculus = new Course("calculus", "Fredrick", "3am");
     }
 
     @Test
