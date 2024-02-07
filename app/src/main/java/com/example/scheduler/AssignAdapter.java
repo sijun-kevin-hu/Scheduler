@@ -60,6 +60,9 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.ViewHolder
                 // menu.setHeaderTitle("Options");
                 menu.add(Menu.NONE, R.id.edit_option, Menu.NONE, "Edit");
                 menu.add(Menu.NONE, R.id.delete_option, Menu.NONE, "Delete");
+                menu.add(Menu.NONE, R.id.sortby_course, Menu.NONE, "sort by Course");
+                menu.add(Menu.NONE, R.id.sortby_date, Menu.NONE, "Sort by Date");
+
             }
         });
     }
@@ -101,6 +104,17 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.ViewHolder
 
     }
 
+    public  void sortByCourse() {
+       Collections.sort(assignList, new Comparator<Assignment>() {
+           @Override
+           public int compare(Assignment o1, Assignment o2) {
+               return o1.getCourseName().compareTo(o2.getCourseName());
+           }
+       });
+
+       notifyDataSetChanged();
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         TextView courseTextView, instructorTextView, timeTextView;
         //modify here
@@ -116,6 +130,9 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.ViewHolder
             menu.setHeaderTitle("Options");
             menu.add(Menu.NONE, R.id.edit_option, Menu.NONE, "Edit");
             menu.add(Menu.NONE, R.id.delete_option, Menu.NONE, "Delete");
+            menu.add(Menu.NONE, R.id.sortby_course, Menu.NONE, "sort by Course");
+            menu.add(Menu.NONE, R.id.sortby_date, Menu.NONE, "Sort by Date");
+
         }
     }
 

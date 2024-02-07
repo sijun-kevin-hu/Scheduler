@@ -209,6 +209,12 @@ public class AssignmentFragment extends Fragment {
             // Remove the selected course from the list and notify adapter
             showDeleteCourseDialog(position);
             return true;
+        } else if(item.getItemId() == R.id.sortby_course) {
+            adapter.sortByCourse();
+            adapter.notifyDataSetChanged();
+        } else if(item.getItemId() == R.id.sortby_date) {
+            adapter.sortAssignmentsByDueDate();
+            adapter.notifyDataSetChanged();
         }
         return super.onContextItemSelected(item);
     }

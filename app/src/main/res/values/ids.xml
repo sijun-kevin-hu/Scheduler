@@ -2,4 +2,7 @@
 <resources>
     <item name="edit_option" type="id">@+id/edit_option</item>
     <item name="delete_option" type="id">@+id/delete_option</item>
+    <item name="sortby_date" type="id">@+id/sortby_course</item>
+    <item name="sortby_course" type="id">@+id/sortby_date</item>
+
 </resources>
