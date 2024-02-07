@@ -92,6 +92,19 @@ public class TodoListFragment extends Fragment {
                 String toDoDate= toDodateInput.getText().toString().trim();
                 String toDoType = toDoTypeInput.getText().toString().trim();
                 String toDoDiscr = toDODiscrInput.getText().toString().trim();
+
+                // Validate the date format
+                if (!isValidDateFormat(toDoDate)) {
+                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate if the date contains only numbers
+                if (!toDoDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
+                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (!toDoType.isEmpty() && !toDoDate.isEmpty()
                         && !toDoDiscr.isEmpty()) {
                     adapter.addToDo(toDoDate, toDoType, toDoDiscr);
@@ -128,11 +141,22 @@ public class TodoListFragment extends Fragment {
         toDodateInput= dialog.findViewById(R.id.toDoDateInput);
         toDoTypeInput= dialog.findViewById(R.id.toDoDateInput);
         toDODiscrInput = dialog.findViewById(R.id.toDoDiscrInput);
-
+        String toDoDate = toDodateInput.getText().toString().trim();
         //Action buttons
         builder.setPositiveButton("update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Validate the date format
+                if (!isValidDateFormat(toDoDate)) {
+                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate if the date contains only numbers
+                if (!toDoDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
+                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 adapter.editToDo(toDodateInput.getText().toString().trim(),
                         toDoTypeInput.getText().toString().trim(),
                         toDODiscrInput.getText().toString().trim());
@@ -188,5 +212,9 @@ public class TodoListFragment extends Fragment {
             return true;
         }
         return super.onContextItemSelected(item);
+    }
+    // Method to validate date format
+    private boolean isValidDateFormat(String date) {
+        return date.matches("\\d{2}-\\d{2}-\\d{2}");
     }
 }

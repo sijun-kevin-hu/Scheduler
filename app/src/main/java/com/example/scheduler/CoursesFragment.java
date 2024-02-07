@@ -99,16 +99,10 @@ public class CoursesFragment extends Fragment implements View.OnCreateContextMen
                 String instructorName = instructorNameInput.getText().toString().trim();
                 String time = timeInput.getText().toString().trim();
                 if (!courseName.isEmpty() && !instructorName.isEmpty()
-                        && !time.isEmpty()) {
-                    //adding new Course to the view
-                    List<Course> currentCourse = viewModel.getCoursesLiveData().getValue();
-                    Course newCourse = new Course(courseName, instructorName, time);
-                    currentCourse.add(newCourse);
-                    viewModel.getCoursesLiveData().setValue(currentCourse);
+                        && !time.isEmpty()) {;
+                        adapter.addCourse(courseName, instructorName, time);
+                        recyclerView.setAdapter(adapter);
 
-                    //adding the course to adapter
-                    adapter.addCourse(courseName, instructorName, time);
-                    recyclerView.setAdapter(adapter);
                 } else {
                     Toast.makeText(getContext(), "Course name cannot be empty", Toast.LENGTH_SHORT).show();
                 }
@@ -148,8 +142,6 @@ public class CoursesFragment extends Fragment implements View.OnCreateContextMen
                                    timeInput.getText().toString().trim());
 
                 recyclerView.setAdapter(adapter);
-            //modify here later
-                Toast.makeText(getContext(),Integer.toString(position),Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {

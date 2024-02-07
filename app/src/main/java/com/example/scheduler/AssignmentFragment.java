@@ -93,6 +93,17 @@ public class AssignmentFragment extends Fragment {
                 String assignTitle = assignTitleInput.getText().toString().trim();
                 String assignCourse = assignCourseInput.getText().toString().trim();
                 String dueDate = dueDateInput.getText().toString().trim();
+                // Validate the date format
+                if (!isValidDateFormat(dueDate)) {
+                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate if the date contains only numbers
+                if (!dueDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
+                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (!assignTitle.isEmpty() && !assignCourse.isEmpty()
                         && !dueDate.isEmpty()) {
                     adapter.addAssign(assignTitle, assignCourse, dueDate);
@@ -129,11 +140,22 @@ public class AssignmentFragment extends Fragment {
         assignTitleInput = dialog.findViewById(R.id.assignTitleInput);
         assignCourseInput = dialog.findViewById(R.id.assignCourseInput);
         dueDateInput = dialog.findViewById(R.id.assignDueDateInput);
-
+        String dueDate = dueDateInput.getText().toString().trim();
         //Action buttons
         builder.setPositiveButton("update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Validate the date format
+                if (!isValidDateFormat(dueDate)) {
+                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate if the date contains only numbers
+                if (!dueDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
+                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 adapter.editAssign(assignTitleInput.getText().toString().trim(),
                         assignCourseInput.getText().toString().trim(),
                         dueDateInput.getText().toString().trim());
@@ -189,6 +211,10 @@ public class AssignmentFragment extends Fragment {
             return true;
         }
         return super.onContextItemSelected(item);
+    }
+    // Method to validate date format
+    private boolean isValidDateFormat(String date) {
+        return date.matches("\\d{2}-\\d{2}-\\d{2}");
     }
 
 }

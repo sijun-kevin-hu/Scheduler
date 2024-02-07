@@ -20,6 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,13 +92,28 @@ public class ExamFragment extends Fragment {
                 String examDate = examDateInput.getText().toString().trim();
                 String examTime= examTimeInput.getText().toString().trim();
                 String examLoc = examLocationInput.getText().toString().trim();
+
+
+                // Validate the date format
+                if (!isValidDateFormat(examDate)) {
+                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate if the date contains only numbers
+                if (!examDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
+                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
+                   return;
+               }
                 if (!examLoc.isEmpty() && !examDate.isEmpty()
                         && !examTime.isEmpty()) {
-                    adapter.addAssign(examDate, examTime, examLoc);
-                    //Sort it based on Date
-                    adapter.sortAssignmentsByDueDate();
-                    //Set the Adapter
-                    recyclerView.setAdapter(adapter);
+                        adapter.addAssign(examDate, examTime, examLoc);
+
+                        //Sort it based on Date
+                        adapter.sortAssignmentsByDueDate();
+                        //Set the Adapter
+                        recyclerView.setAdapter(adapter);
+
                 } else {
                     Toast.makeText(getContext(), "Exam fields can not be empty", Toast.LENGTH_SHORT).show();
                 }
@@ -127,11 +143,23 @@ public class ExamFragment extends Fragment {
         examDateInput = dialog.findViewById(R.id.examDateInput);
         examTimeInput = dialog.findViewById(R.id.examTimeInput);
         examLocationInput = dialog.findViewById(R.id.examLocationInput);
+        String examDate =examDateInput.getText().toString().trim();
 
         //Action buttons
         builder.setPositiveButton("update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                // Validate the date format
+                if (!isValidDateFormat(examDate)) {
+                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Validate if the date contains only numbers
+                if (!examDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
+                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 adapter.editExam(examDateInput.getText().toString().trim(),
                         examTimeInput.getText().toString().trim(),
                         examLocationInput.getText().toString().trim());
@@ -187,5 +215,10 @@ public class ExamFragment extends Fragment {
             return true;
         }
         return super.onContextItemSelected(item);
+    }
+
+    // Method to validate date format
+    private boolean isValidDateFormat(String date) {
+        return date.matches("\\d{2}-\\d{2}-\\d{2}");
     }
 }
