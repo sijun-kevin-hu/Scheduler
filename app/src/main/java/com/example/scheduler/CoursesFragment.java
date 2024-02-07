@@ -8,6 +8,10 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,22 +38,19 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class CoursesFragment extends Fragment implements View.OnCreateContextMenuListener{
-    private Catalog<String> courses;
     private RecyclerView recyclerView;
     private CoursesAdapter adapter;
     private FloatingActionButton addButton;
     private TextInputEditText courseNameInput, instructorNameInput, timeInput;
     private LayoutInflater inflater;
-    private NavigationView navigationView;
-    public List<Course> coursesList;
-
+    private CoursesViewModel viewModel;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        courses = new Catalog<>();
-        coursesList = new ArrayList<>();
-        adapter = new CoursesAdapter(coursesList);
-    }
+        //initializing the viewModel
+        viewModel = new ViewModelProvider(this).get(CoursesViewModel.class);
+        adapter = new CoursesAdapter(viewModel.getCoursesLiveData().getValue());
+}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,9 +63,10 @@ public class CoursesFragment extends Fragment implements View.OnCreateContextMen
         // Initialize RecyclerView layout manager and adapter
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
         //registering the context menu
         registerForContextMenu(recyclerView);
-
+        recyclerView.setAdapter(adapter);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +100,13 @@ public class CoursesFragment extends Fragment implements View.OnCreateContextMen
                 String time = timeInput.getText().toString().trim();
                 if (!courseName.isEmpty() && !instructorName.isEmpty()
                         && !time.isEmpty()) {
+                    //adding new Course to the view
+                    List<Course> currentCourse = viewModel.getCoursesLiveData().getValue();
+                    Course newCourse = new Course(courseName, instructorName, time);
+                    currentCourse.add(newCourse);
+                    viewModel.getCoursesLiveData().setValue(currentCourse);
+
+                    //adding the course to adapter
                     adapter.addCourse(courseName, instructorName, time);
                     recyclerView.setAdapter(adapter);
                 } else {

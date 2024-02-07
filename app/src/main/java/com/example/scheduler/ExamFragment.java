@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,13 +36,13 @@ public class ExamFragment extends Fragment {
     private TextInputEditText examDateInput, examTimeInput, examLocationInput;
     private LayoutInflater inflater;
     private NavigationView navigationView;
-    public List<Exam>  examList;
+    public ExamViewModel examViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        examList = new ArrayList<>();
-        adapter = new ExamAdapter(examList);
+        examViewModel = new ViewModelProvider(this).get(ExamViewModel.class);
+        adapter = new ExamAdapter(examViewModel.getExamLiveData().getValue());
     }
 
     @Override
@@ -57,7 +58,8 @@ public class ExamFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         //registering the context menu
         registerForContextMenu(recyclerView);
-
+        //Initialize the recyclerView with adapter
+        recyclerView.setAdapter(adapter);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

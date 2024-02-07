@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,13 +36,13 @@ public class TodoListFragment extends Fragment {
     private TextInputEditText toDodateInput, toDoTypeInput, toDODiscrInput;
     private LayoutInflater inflater;
     private NavigationView navigationView;
-    public List<ToDoList> toDoList;
+    public TodoViewModel todoViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        toDoList = new ArrayList<>();
-        adapter = new ToDoAdapter(toDoList);
+      todoViewModel = new ViewModelProvider(this).get(TodoViewModel.class);
+        adapter = new ToDoAdapter(todoViewModel.getListMutableLiveData().getValue());
     }
 
     @Override
@@ -57,6 +59,8 @@ public class TodoListFragment extends Fragment {
         //registering the context menu
         registerForContextMenu(recyclerView);
 
+       //Initialize the recyclerView with adapter
+        recyclerView.setAdapter(adapter);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

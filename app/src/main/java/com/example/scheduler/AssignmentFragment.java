@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,13 +33,16 @@ public class AssignmentFragment extends Fragment {
     private TextInputEditText assignTitleInput, assignCourseInput, dueDateInput;
     private LayoutInflater inflater;
     private NavigationView navigationView;
-    public List<Assignment> assignList;
+    public AssignViewModel assignViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        assignList = new ArrayList<>();
-        adapter = new AssignAdapter(assignList);
+        //initialize the ViewModel
+        assignViewModel = new ViewModelProvider(this).get(AssignViewModel.class);
+        //initialize the adapter with the ViewModel
+        adapter = new AssignAdapter(assignViewModel.getAssignLiveData().getValue());
+
     }
 
     @Override
@@ -54,6 +58,9 @@ public class AssignmentFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         //registering the context menu
         registerForContextMenu(recyclerView);
+
+        //Setting the adapter
+        recyclerView.setAdapter(adapter);
 
 
         addButton.setOnClickListener(new View.OnClickListener() {

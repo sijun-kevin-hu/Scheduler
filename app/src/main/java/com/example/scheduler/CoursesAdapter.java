@@ -85,7 +85,6 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
     public int getClickedPosition(){
         return clickedPosition;
     }
-
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         TextView courseTextView, instructorTextView, timeTextView;
         //modify here

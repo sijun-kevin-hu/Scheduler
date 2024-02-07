@@ -46,6 +46,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
     //Round image view
     //implmentation ("com.makeramen:roundedimageview:2.3.0")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     //Android Tests
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
