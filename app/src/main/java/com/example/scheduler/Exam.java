@@ -4,7 +4,7 @@ import android.telephony.mbms.StreamingServiceInfo;
 
 import com.example.scheduler.Date;
 
-public class Exam implements NotificationItem{
+public class Exam  {
     private String date;
     private String time;
     private String location;
@@ -37,15 +37,15 @@ public class Exam implements NotificationItem{
     public void setLocation(String location) {
         this.location = location;
     }
-    @Override
+
     public String getDueDate(){
         return getDate();
     }
-    @Override
+
     public String getName(){
       return  getLocation();
     }
-    @Override
+
     public Date getFormattedDate(){
         String[] format = date.split("-");
         int month = Integer.parseInt(format[0]);
@@ -54,8 +54,5 @@ public class Exam implements NotificationItem{
         Date due = new Date(month, day, year);
         return due;
     }
-    @Override
-    public String getType(){
-        return"Exam at";
-    }
+
 }

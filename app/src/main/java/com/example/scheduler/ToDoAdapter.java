@@ -22,7 +22,6 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     private TextView title, name, time;
     private int clickedPosition = -1;
     private Date date;
-    private NotifAdapter notif;
 
     public ToDoAdapter(List<ToDoList> toDoList) {
 
@@ -76,11 +75,6 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
                           String toDoDiscr) {
         ToDoList newTodo = new ToDoList(toDoDate, toDoType,toDoDiscr);
         toDoList.add(newTodo);
-        Calendar toDay = Calendar.getInstance();
-        //add TodoList into Notification List
-        if (toDay.equals(newTodo.getFormattedDate())) {
-            notif.addNotif("Todo List", toDoDiscr, toDoDate);
-        }
     }
     public void editToDo(String toDoDate, String toDoType,
                            String toDoDiscr){

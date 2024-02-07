@@ -2,7 +2,7 @@ package com.example.scheduler;
 
 import androidx.annotation.NonNull;
 
-public class ToDoList implements NotificationItem {
+public class ToDoList  {
     private String date;
     private String type;
     private String discr;
@@ -35,16 +35,16 @@ public class ToDoList implements NotificationItem {
     public void setDiscr(String discr) {
         this.discr = discr;
     }
-    @Override
+
     public String getName(){
         return getType();
     }
 
-    @Override
+
     public String getDueDate() {
         return null;
     }
-@Override
+
     public Date getFormattedDate(){
         String[] format = date.split("-");
         int month = Integer.parseInt(format[0]);

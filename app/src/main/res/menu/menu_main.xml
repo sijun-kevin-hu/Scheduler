@@ -23,10 +23,4 @@
     <item android:id="@+id/todoList"
         android:title="@string/TodoList"
         android:icon="@drawable/todo_list"/>
-   <item
-   android:id="@+id/notification"
-       android:icon="@drawable/notification"
-       android:title="@string/notifcation"
-    android:orderInCategory="100"
-   app:showAsAction="never"/>
 </menu>

@@ -1,6 +1,6 @@
 package com.example.scheduler;
 
-public class Assignment implements NotificationItem {
+public class Assignment {
     private String courseName;
     private String assignmentName;
     private String dueDate;
@@ -36,7 +36,7 @@ public class Assignment implements NotificationItem {
     public void setDueDate(String date) {
         this.dueDate = date;
     }
-    @Override
+
     /**
      * getDate: return the date of the assignments
      * @return date
@@ -63,9 +63,9 @@ public class Assignment implements NotificationItem {
      * Returns the name variable
      * @return a String name
      */
-    @Override
+
     public String getName() {return this.assignmentName;}
-    @Override
+
     public Date getFormattedDate(){
         String[] format = dueDate.split("-");
         int month = Integer.parseInt(format[0]);
@@ -74,9 +74,6 @@ public class Assignment implements NotificationItem {
         Date due = new Date(month, day, year);
         return due;
     }
-    @Override
-    public String getType(){
-        return"Assignment";
-    }
+
 
 }
