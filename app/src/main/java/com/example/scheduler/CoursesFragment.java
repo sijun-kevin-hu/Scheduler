@@ -142,7 +142,9 @@ public class CoursesFragment extends Fragment implements View.OnCreateContextMen
                                    timeInput.getText().toString().trim());
 
                 recyclerView.setAdapter(adapter);
+                Toast.makeText(getContext(), "Course is successfully updated!!", Toast.LENGTH_SHORT).show();
             }
+
         });
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override

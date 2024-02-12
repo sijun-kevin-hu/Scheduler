@@ -136,15 +136,16 @@ public class AssignmentFragment extends Fragment {
         //setUp the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(dialog);
-        builder.setTitle("Edit the Course");
+        builder.setTitle("Edit the Assignment");
         assignTitleInput = dialog.findViewById(R.id.assignTitleInput);
         assignCourseInput = dialog.findViewById(R.id.assignCourseInput);
         dueDateInput = dialog.findViewById(R.id.assignDueDateInput);
-        String dueDate = dueDateInput.getText().toString().trim();
+
         //Action buttons
         builder.setPositiveButton("update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String dueDate = dueDateInput.getText().toString().trim();
                 // Validate the date format
                 if (!isValidDateFormat(dueDate)) {
                     Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
@@ -162,6 +163,7 @@ public class AssignmentFragment extends Fragment {
                 //Sort it based on Date
                 adapter.sortAssignmentsByDueDate();
                 recyclerView.setAdapter(adapter);
+                Toast.makeText(getContext(), "Assignment is successfully updated!!", Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {

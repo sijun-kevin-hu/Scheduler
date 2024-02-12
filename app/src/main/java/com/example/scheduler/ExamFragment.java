@@ -139,22 +139,16 @@ public class ExamFragment extends Fragment {
         //setUp the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(dialog);
-        builder.setTitle("Edit the Course");
+        builder.setTitle("Edit the Exam");
         examDateInput = dialog.findViewById(R.id.examDateInput);
         examTimeInput = dialog.findViewById(R.id.examTimeInput);
         examLocationInput = dialog.findViewById(R.id.examLocationInput);
-        String examDate =examDateInput.getText().toString().trim();
 
         //Action buttons
         builder.setPositiveButton("update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                // Validate the date format
-                if (!isValidDateFormat(examDate)) {
-                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
+                String examDate =examDateInput.getText().toString().trim();
                 // Validate if the date contains only numbers
                 if (!examDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
                     Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
@@ -166,6 +160,7 @@ public class ExamFragment extends Fragment {
                 //Sort it based on Date
                 adapter.sortAssignmentsByDueDate();
                 recyclerView.setAdapter(adapter);
+                Toast.makeText(getContext(), "Exam is successfully updated!!", Toast.LENGTH_SHORT).show();
             }
         });
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {

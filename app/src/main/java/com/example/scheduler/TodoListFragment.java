@@ -137,15 +137,16 @@ public class TodoListFragment extends Fragment {
         //setUp the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(dialog);
-        builder.setTitle("Edit the Course");
+        builder.setTitle("Edit the Todo List");
         toDodateInput= dialog.findViewById(R.id.toDoDateInput);
         toDoTypeInput= dialog.findViewById(R.id.toDoDateInput);
         toDODiscrInput = dialog.findViewById(R.id.toDoDiscrInput);
-        String toDoDate = toDodateInput.getText().toString().trim();
+
         //Action buttons
         builder.setPositiveButton("update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                String toDoDate = toDodateInput.getText().toString().trim();
                 // Validate the date format
                 if (!isValidDateFormat(toDoDate)) {
                     Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
@@ -163,6 +164,8 @@ public class TodoListFragment extends Fragment {
                 //Sort it based on Date
                 adapter.sortAssignmentsByDueDate();
                 recyclerView.setAdapter(adapter);
+                Toast.makeText(getContext(), "Todo List is successfully updated!!", Toast.LENGTH_SHORT).show();
+
             }
         });
         builder.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
