@@ -47,7 +47,7 @@ public class Exam  {
     }
 
     public Date getFormattedDate(){
-        String[] format = date.split("-");
+        String[] format = date.split("/");
         int month = Integer.parseInt(format[0]);
         int day = Integer.parseInt(format[1]);
         int year = Integer.parseInt(format[2]);

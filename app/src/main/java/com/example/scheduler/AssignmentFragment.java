@@ -1,6 +1,7 @@
 package com.example.scheduler;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -23,6 +25,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -82,28 +85,20 @@ public class AssignmentFragment extends Fragment {
         builder.setView(dialogView);
         builder.setTitle("Add Course");
 
+        //setting date picker
+         datePicker(dialogView);
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Add the course when the "Add" button in the dialog is clicked
                 assignTitleInput = dialogView.findViewById(R.id.assignTitleInput);
                 assignCourseInput = dialogView.findViewById(R.id.assignCourseInput);
-                dueDateInput = dialogView.findViewById(R.id.assignDueDateInput);
+
 
                 String assignTitle = assignTitleInput.getText().toString().trim();
                 String assignCourse = assignCourseInput.getText().toString().trim();
                 String dueDate = dueDateInput.getText().toString().trim();
-                // Validate the date format
-                if (!isValidDateFormat(dueDate)) {
-                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
-                // Validate if the date contains only numbers
-                if (!dueDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
-                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 if (!assignTitle.isEmpty() && !assignCourse.isEmpty()
                         && !dueDate.isEmpty()) {
                     adapter.addAssign(assignTitle, assignCourse, dueDate);
@@ -139,24 +134,15 @@ public class AssignmentFragment extends Fragment {
         builder.setTitle("Edit the Assignment");
         assignTitleInput = dialog.findViewById(R.id.assignTitleInput);
         assignCourseInput = dialog.findViewById(R.id.assignCourseInput);
-        dueDateInput = dialog.findViewById(R.id.assignDueDateInput);
 
+        //set date picker
+        datePicker(dialog);
         //Action buttons
         builder.setPositiveButton("update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String dueDate = dueDateInput.getText().toString().trim();
-                // Validate the date format
-                if (!isValidDateFormat(dueDate)) {
-                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
-                // Validate if the date contains only numbers
-                if (!dueDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
-                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 adapter.editAssign(assignTitleInput.getText().toString().trim(),
                         assignCourseInput.getText().toString().trim(),
                         dueDateInput.getText().toString().trim());
@@ -220,9 +206,29 @@ public class AssignmentFragment extends Fragment {
         }
         return super.onContextItemSelected(item);
     }
-    // Method to validate date format
-    private boolean isValidDateFormat(String date) {
-        return date.matches("\\d{2}-\\d{2}-\\d{2}");
+    // Method for date picker
+    void datePicker(View dialogView) {
+        dueDateInput = dialogView.findViewById(R.id.assignDueDateInput);
+        dueDateInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cldr = Calendar.getInstance();
+                int year = cldr.get(Calendar.YEAR);
+                int month = cldr.get(Calendar.MONTH);
+                int dayOfMonth = cldr.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                dueDateInput.setText(String.format("%02d", month + 1) +"/"+
+                                        String.format("%02d", dayOfMonth) + "/"+ year%100);
+                            }
+                        }, year, month, dayOfMonth);
+                datePickerDialog.show();
+            }
+        });
+
     }
+
 
 }

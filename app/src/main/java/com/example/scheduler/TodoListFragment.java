@@ -1,6 +1,7 @@
 package com.example.scheduler;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -15,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,6 +25,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -80,30 +84,18 @@ public class TodoListFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(dialogView);
         builder.setTitle("Add TodoList");
-
+        //set up date picker
+        datePicker(dialogView);
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Add the course when the "Add" button in the dialog is clicked
-                toDodateInput = dialogView.findViewById(R.id.toDoDateInput);
                 toDoTypeInput = dialogView.findViewById(R.id.toDoTypeInput);
                 toDODiscrInput = dialogView.findViewById(R.id.toDoDiscrInput);
 
                 String toDoDate= toDodateInput.getText().toString().trim();
                 String toDoType = toDoTypeInput.getText().toString().trim();
                 String toDoDiscr = toDODiscrInput.getText().toString().trim();
-
-                // Validate the date format
-                if (!isValidDateFormat(toDoDate)) {
-                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Validate if the date contains only numbers
-                if (!toDoDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
-                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
                 if (!toDoType.isEmpty() && !toDoDate.isEmpty()
                         && !toDoDiscr.isEmpty()) {
@@ -138,7 +130,10 @@ public class TodoListFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(dialog);
         builder.setTitle("Edit the Todo List");
-        toDodateInput= dialog.findViewById(R.id.toDoDateInput);
+
+        //set Up date picker
+        datePicker(dialog);
+
         toDoTypeInput= dialog.findViewById(R.id.toDoDateInput);
         toDODiscrInput = dialog.findViewById(R.id.toDoDiscrInput);
 
@@ -147,17 +142,6 @@ public class TodoListFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String toDoDate = toDodateInput.getText().toString().trim();
-                // Validate the date format
-                if (!isValidDateFormat(toDoDate)) {
-                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Validate if the date contains only numbers
-                if (!toDoDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
-                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 adapter.editToDo(toDodateInput.getText().toString().trim(),
                         toDoTypeInput.getText().toString().trim(),
                         toDODiscrInput.getText().toString().trim());
@@ -216,8 +200,28 @@ public class TodoListFragment extends Fragment {
         }
         return super.onContextItemSelected(item);
     }
-    // Method to validate date format
-    private boolean isValidDateFormat(String date) {
-        return date.matches("\\d{2}-\\d{2}-\\d{2}");
+    // Date picker void method
+    void datePicker(View dialogView) {
+        //Set date picker
+        toDodateInput = dialogView.findViewById(R.id.toDoDateInput);
+        toDodateInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int year = cldr.get(Calendar.YEAR);
+                int months = cldr.get(Calendar.MONTH);
+                int dayOfMonth = cldr.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                toDodateInput.setText((String.format("%02d", month+1) +"/"+ String.format("%02d",
+                                        dayOfMonth) +"/"+year%100));
+                            }
+                        }, year, months, dayOfMonth);
+                datePickerDialog.show();
+            }
+        });
     }
 }

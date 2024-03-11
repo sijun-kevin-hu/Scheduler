@@ -70,8 +70,9 @@ public class CoursesAdapter extends RecyclerView.Adapter<CoursesAdapter.ViewHold
 
     public void addCourse(String courseName, String instructorName,
                           String time) {
-        Course newCourse = new Course(courseName, instructorName, time);
-        coursesList.add(newCourse);
+            Course newCourse = new Course(courseName, instructorName, time);
+            coursesList.add(newCourse);
+
     }
     public void editCourse(String courseName, String instructorName,
                            String time){

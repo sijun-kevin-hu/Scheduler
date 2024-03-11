@@ -38,8 +38,8 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Assignment newAssign = assignList.get(position);
 
-        holder.courseTextView.setText(newAssign.getName());
-        holder.instructorTextView.setText(newAssign.getCourseName());
+        holder.courseTextView.setText(newAssign.getCourseName());
+        holder.instructorTextView.setText(newAssign.getName());
         holder.timeTextView.setText(newAssign.getDueDate());
         //getting clicked position
 
@@ -80,7 +80,6 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.ViewHolder
     }
     public void editAssign(String assignTitle, String assignCourse,
                            String dueDate){
-
         assignList.get(clickedPosition).setName(assignTitle);
         assignList.get(clickedPosition).setCourseName(assignCourse);
         assignList.get(clickedPosition).setDueDate(dueDate);
@@ -108,7 +107,7 @@ public class AssignAdapter extends RecyclerView.Adapter<AssignAdapter.ViewHolder
        Collections.sort(assignList, new Comparator<Assignment>() {
            @Override
            public int compare(Assignment o1, Assignment o2) {
-               return o1.getCourseName().compareTo(o2.getCourseName());
+               return o1.getName().compareTo(o2.getName()); // updated as one of the bug
            }
        });
 

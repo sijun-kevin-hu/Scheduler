@@ -1,6 +1,10 @@
 package com.example.scheduler;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -10,18 +14,23 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -38,6 +47,8 @@ public class ExamFragment extends Fragment {
     private LayoutInflater inflater;
     private NavigationView navigationView;
     public ExamViewModel examViewModel;
+    public TimePickerDialog timer;
+    private int hr, min;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,30 +92,20 @@ public class ExamFragment extends Fragment {
         builder.setView(dialogView);
         builder.setTitle("Add Course");
 
+        //Set time picker
+        timePicker(dialogView);
+      // Set date Picker
+        datePicker(dialogView);
         builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Add the course when the "Add" button in the dialog is clicked
-                examDateInput = dialogView.findViewById(R.id.examDateInput);
-                examTimeInput = dialogView.findViewById(R.id.examTimeInput);
                 examLocationInput = dialogView.findViewById(R.id.examLocationInput);
 
                 String examDate = examDateInput.getText().toString().trim();
                 String examTime= examTimeInput.getText().toString().trim();
                 String examLoc = examLocationInput.getText().toString().trim();
 
-
-                // Validate the date format
-                if (!isValidDateFormat(examDate)) {
-                    Toast.makeText(getContext(), "Invalid date format. Please use MM-DD-YY", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Validate if the date contains only numbers
-                if (!examDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
-                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
-                   return;
-               }
                 if (!examLoc.isEmpty() && !examDate.isEmpty()
                         && !examTime.isEmpty()) {
                         adapter.addAssign(examDate, examTime, examLoc);
@@ -140,8 +141,12 @@ public class ExamFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setView(dialog);
         builder.setTitle("Edit the Exam");
-        examDateInput = dialog.findViewById(R.id.examDateInput);
-        examTimeInput = dialog.findViewById(R.id.examTimeInput);
+
+        //set date picker
+        datePicker(dialog);
+        //set time picker
+        timePicker(dialog);
+
         examLocationInput = dialog.findViewById(R.id.examLocationInput);
 
         //Action buttons
@@ -149,11 +154,6 @@ public class ExamFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String examDate =examDateInput.getText().toString().trim();
-                // Validate if the date contains only numbers
-                if (!examDate.matches("^(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\\d{2}$"))  {
-                    Toast.makeText(getContext(), "Invalid date format. Please use numbers only", Toast.LENGTH_SHORT).show();
-                    return;
-                }
                 adapter.editExam(examDateInput.getText().toString().trim(),
                         examTimeInput.getText().toString().trim(),
                         examLocationInput.getText().toString().trim());
@@ -213,7 +213,54 @@ public class ExamFragment extends Fragment {
     }
 
     // Method to validate date format
-    private boolean isValidDateFormat(String date) {
-        return date.matches("\\d{2}-\\d{2}-\\d{2}");
+   void datePicker(View dialogView) {
+       //set date picker
+       examDateInput = dialogView.findViewById(R.id.examDateInput);
+       examDateInput.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               final Calendar cldr = Calendar.getInstance();
+               int year = cldr.get(Calendar.YEAR);
+               int months = cldr.get(Calendar.MONTH);
+               int dayOfMonth = cldr.get(Calendar.DAY_OF_MONTH);
+
+               DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                       new DatePickerDialog.OnDateSetListener() {
+                           @Override
+                           public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                               examDateInput.setText((String.format("%02d", month+1) +"/"+ String.format("%02d",
+                                       dayOfMonth) +"/"+year%100));
+                           }
+                       }, year, months, dayOfMonth);
+               datePickerDialog.show();
+           }
+       });
+   }
+   //void time picker helper method
+    void timePicker(View dialogView) {
+        examTimeInput = dialogView.findViewById(R.id.examTimeInput);
+        examTimeInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int hour = cldr.get(Calendar.HOUR_OF_DAY);
+                int minutes = cldr.get(Calendar.MINUTE);
+                timer = new TimePickerDialog(getContext(), new
+                        TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                String pm_am = "am";
+                                if(hourOfDay > 12) {
+                                    hourOfDay = hourOfDay - 12;
+                                    pm_am = "pm";
+                                }
+                                examTimeInput.setText(new StringBuilder()
+                                        .append(String.format("%02d",hourOfDay)).append(":")
+                                        .append(String.format("%02d",minute)).append(pm_am).toString());
+                            }
+                        }, hour, minutes, false);
+                timer.show();
+            }
+        });
     }
 }

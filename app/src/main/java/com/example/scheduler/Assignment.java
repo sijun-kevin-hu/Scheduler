@@ -67,7 +67,7 @@ public class Assignment {
     public String getName() {return this.assignmentName;}
 
     public Date getFormattedDate(){
-        String[] format = dueDate.split("-");
+        String[] format = dueDate.split("/");
         int month = Integer.parseInt(format[0]);
         int day = Integer.parseInt(format[1]);
         int year = Integer.parseInt(format[2]);
